@@ -1,0 +1,38 @@
+/* Design tokens. Change the palette and fonts here; everything else reads from them. */
+:root {
+  /* Surfaces: blue-black ink, lightest to darkest by elevation */
+  --page: #0a0d12;
+  --plate: #0f141b;
+  --raise: #151c26;
+  --deep: #070a0e;
+
+  /* Rules and borders */
+  --line: #253042;
+  --line-2: #18202c;
+
+  /* Text */
+  --paper: #e8ecf2;
+  --paper-2: #c4ccd8;
+  --muted: #8b96a8;
+
+  /* Accents: signal blue is the brand; mint means live, amber means attention */
+  --signal: #5b9dff;
+  --signal-soft: #9cc3ff;
+  --signal-glow: rgb(91 157 255 / 0.16);
+  --mint: #4fd1a5;
+  --amber: #f2b24c;
+
+  /* Type */
+  --f-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif;
+  --f-serif: "Instrument Serif", Georgia, serif;
+  --f-body: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Layout and motion */
+  --pad: clamp(16px, 3.4vw, 48px);
+  --max: 1320px;
+  --nav-h: 64px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
+}
