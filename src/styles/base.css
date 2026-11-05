@@ -1,0 +1,303 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--page);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  scroll-padding-top: calc(var(--nav-h) + 8px);
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  overflow-x: hidden;
+}
+
+/* Lenis handles smooth scrolling; native smooth scrolling would fight it */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+dd,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--pad);
+  top: -100px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--signal);
+  color: var(--deep);
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ---------- Shared primitives ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.mono {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.accent {
+  color: var(--signal);
+}
+
+.section {
+  position: relative;
+  padding: clamp(80px, 12vw, 160px) 0;
+  border-top: 1px solid var(--line-2);
+}
+
+/* "About." — serif heading that ends in an accent full stop */
+.section-title {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(56px, 9vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.section-title .dot {
+  color: var(--signal);
+}
+
+.lede {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.2;
+  color: var(--paper);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.btn:hover {
+  border-color: var(--paper);
+}
+
+.btn--solid {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--deep);
+}
+
+.btn--solid:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 0 rgb(79 209 165 / 0.6);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(79 209 165 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgb(79 209 165 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(79 209 165 / 0);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-2);
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--badge, var(--signal));
+}
+
+.badge--live {
+  --badge: var(--mint);
+}
+
+.badge--team {
+  --badge: var(--amber);
+}
+
+/* Faint blueprint grid behind the page */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+  opacity: 0.55;
+}
+
+/* Fine film grain over everything, so the flat dark surfaces read as material rather than empty */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Scroll rail down the left gutter */
+.rail {
+  position: fixed;
+  left: max(8px, calc(var(--pad) / 2 - 1px));
+  top: calc(var(--nav-h) + 16px);
+  bottom: 24px;
+  width: 1px;
+  z-index: 40;
+  background: var(--line-2);
+  pointer-events: none;
+}
+
+.rail__fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--signal-soft), var(--signal));
+  transform-origin: top;
+}
+
+.rail__dot {
+  position: absolute;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow:
+    0 0 0 3px rgb(91 157 255 / 0.18),
+    0 0 14px var(--signal);
+}
+
+@media (max-width: 900px) {
+  .rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
